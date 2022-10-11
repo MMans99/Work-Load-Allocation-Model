@@ -1,0 +1,61 @@
+{% macro render_fields4_label(field1, help1, field2, help2, field3, help3, field4, help4) %}
+<div class="form-group row">
+    <div class="col-sm-4 mb-3 mb-sm-0">
+        {{ field1.label }}
+        {{ field1 }}
+        <small class="form-text text-muted">{{ help1 }}</small>
+        {% if field1.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field1.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        {{ field2.label }}
+        {{ field2 }}
+        <small class="form-text text-muted">{{ help2 }}</small>
+        {% if field2.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field2.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        {{ field3.label }}
+        {{ field3 }}
+        <small class="form-text text-muted">{{ help3 }}</small>
+        {% if field3.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field3.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-4">
+        {{ field4.label }}
+        {{ field4 }}
+        <small class="form-text text-muted">{{ help4 }}</small>
+        {% if field4.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field4.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div style="height: 8px;"></div>
+{% endmacro %}

@@ -1,0 +1,138 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+{% from "render/role.html" import render_role %}
+
+{% block title %}WLAM - Details{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('user_summary', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Details ({{ user.fname }} {{ user.lname }})</h1>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('ID', user.university_id) }}
+{{ render_field_view('First name', user.fname) }}
+{{ render_field_view('Last name', user.lname) }}
+{{ render_field_view('Email', user.email) }}
+{{ render_field_view('Role', render_role(user.role)) }}
+{{ render_field_view('Rank', user.rank.name) }}
+{{ render_field_view('Profile', user.profile.name) }}
+{{ render_field_view('Department', user.department.name) }}
+{{ render_field_view('Department1', user.department1.name) }}
+{{ render_field_view('Department2', user.department2.name) }}
+<hr>
+<h3 class="h3">Teaching</h3>
+{{ render_field_view('Lectures', user.dt111) }}
+{{ render_field_view('Laboratory', user.dt112) }}
+{{ render_field_view('SDP/FYP/Master Research Project Supervision', user.dt113) }}
+{{ render_field_view('Direct Postgraduate Supervision', user.dt114) }}
+{{ render_field_view('Scheduled drop ins/Office Hours', user.dt121) }}
+{{ render_field_view('Tutorials', user.dt122) }}
+{{ render_field_view('Exam invigilation', user.dt123) }}
+{{ render_field_view('Other', user.dt124) }}
+{{ render_field_view('Preparation', user.dt13) }}
+{{ render_field_view('Preperation of Totally New Course', user.dt14) }}
+{{ render_field_view('Assessment/Reassessment', user.dt15) }}
+{{ render_field_view('Office Hour Courses/Practical Training', user.dt16) }}
+{{ render_field_view('Professional Development Activties', user.dt17)
+}}
+<hr>
+{{ render_field_view('Summary', sumdt) }}
+<hr style="height:4px">
+
+<h3 class="h3">Indirect Supervision</h3>
+{{ render_field_view('PhD Thesis Supervision (MSc & PhD)', user.gs21) }}
+<!-- {{ render_field_view('Master Thesis Supervision', user.gs22) }} -->
+{{ render_field_view('Thesis Support Roles', user.gs23) }}
+{{ render_field_view('Graduate Program Coordination', user.gs24) }}
+{{ render_field_view('Other', user.gs25) }}
+<hr>
+{{ render_field_view('Summary', sumgs) }}
+<hr style="height:4px">
+
+<h3 class="h3">Research</h3>
+{{ render_field_view('Teaching and Research Related Scholarship', user.r31) }}
+{{ render_field_view('Journal Articles', user.r321) }}
+{{ render_field_view('Conference Articles', user.r322) }}
+{{ render_field_view('New to University: Role Development', user.r33) }}
+{{ render_field_view('Internally-Funded Research', user.r34) }}
+{{ render_field_view('External Funded Research', user.r35) }}
+{{ render_field_view('Support for research', user.r36) }}
+{{ render_field_view('Patents', user.r37) }}
+{{ render_field_view('Professional Development Activties', user.r38) }}
+<hr>
+{{ render_field_view('Summary', sumr) }}
+<hr style="height:4px">
+
+<h3 class="h3">University and Community Service</h3>
+{{ render_field_view('Accreditation and Related Administrative Tasks', user.uc41) }}
+{{ render_field_view('Committee Work', user.uc42) }}
+{{ render_field_view('Teaching/Research Related Administration', user.uc43) }}
+{{ render_field_view('Administrative Tasks/requests from Dept., College, University', user.uc44) }}
+{{ render_field_view('Conference/Workshop Organization & Support', user.uc45) }}
+{{ render_field_view('Editorial Board, Guest Editor', user.uc461) }}
+{{ render_field_view('Referee for Journals and Conferences', user.uc462) }}
+{{ render_field_view('Membership in Professional Organizations', user.uc463) }}
+{{ render_field_view('Consulting', user.uc47) }}
+{{ render_field_view('Engagemwent in training and lifelong learning', user.uc48) }}
+{{ render_field_view('Collaboration projects with the Community', user.uc49) }}
+<hr>
+{{ render_field_view('Summary', sumuc) }}
+<hr style="height:4px">
+
+<h3 class="h3">Leadership, Management and Administration</h3>
+{{ render_field_view('Senior Management Roles', user.l51) }}
+{{ render_field_view('Dean', user.l52) }}
+{{ render_field_view('Director', user.l53) }}
+{{ render_field_view('Vice-Dean', user.l54) }}
+{{ render_field_view('Assistant-Dean', user.l55) }}
+{{ render_field_view('Dept. Chair', user.l56) }}
+{{ render_field_view('Program Coordinator', user.l57) }}
+{{ render_field_view('Other', user.l58) }}
+<hr>
+{{ render_field_view('Summary', suml) }}
+
+<hr style="height:4px">
+{{ render_field_view('Total Hours', total) }}
+<hr style="height:4px">
+
+<h3 class="h3">Courses Selection</h3>
+{{ render_field_view('Course1', user.course1.name) }}
+{{ render_field_view('Course2', user.course2.name) }}
+{{ render_field_view('Course3', user.course3.name) }}
+{{ render_field_view('Course4', user.course4.name) }}
+{{ render_field_view('Course5', user.course5.name) }}
+{{ render_field_view('Course6', user.course6.name) }}
+{{ render_field_view('Course7', user.course7.name) }}
+{{ render_field_view('Course8', user.course8.name) }}
+<hr>
+{{ render_field_view('Total Effort', totalc) }}
+<hr style="height:4px">
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Expected ({{ user.profile.name }})</h1>
+</div>
+
+{{ render_field_view('Direct Teaching', user.profile.direct_teaching) }}
+{{ render_field_view('Supervision', user.profile.supervision) }}
+{{ render_field_view('Research', user.profile.research) }}
+{{ render_field_view('University and Community Service', user.profile.university_service) }}
+{{ render_field_view('Leadership, Management and Administration', user.profile.lead_manage_admin) }}
+
+<hr>
+{{ render_field_view('Total Expected Hours',
+user.profile.direct_teaching+user.profile.supervision+user.profile.research+user.profile.university_service+user.profile.lead_manage_admin)
+}} 
+
+{% endblock %}

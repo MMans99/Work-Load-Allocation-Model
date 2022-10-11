@@ -1,0 +1,68 @@
+{% from "render/sidebar_admin.html" import render_sidebar_admin %}
+{% from "render/sidebar_user.html" import render_sidebar_user %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>{% block title %}{% endblock %}</title>
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  {% block styles %}{% endblock %}
+</head>
+
+<body>
+  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ url_for('anon.home') }}"><img
+        src="{{ url_for('static', filename='img/University_of_Sharjah_Logo_White.png') }}" width="140" height="100"></a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+      data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav px-3" style="color: white;"><h1>Work-Load Allocation Model (WLAM)</h1></ul>
+    <ul class="navbar-nav px-3 flex-grow-1"></ul>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link {% block navbar %}{% endblock %}" href="{{ url_for('account.view') }}">{% block username %}{% endblock %}</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="{{ url_for('anon.signout') }}">Sign out</a>
+      </li>
+    </ul>
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      {% block sidebar %}{% endblock %}
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+<!--
+  <footer class="container-fluid fixed-bottom">
+    <div class="row">
+      <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <p>{% block copyright %}{% endblock %}</p>
+      </div>
+    </div>
+  </footer>
+-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/efe4d76405.js" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='js/feather.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/chart.min.js') }}"></script>
+  <!-- Custom scripts for this template -->
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

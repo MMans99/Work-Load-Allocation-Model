@@ -1,0 +1,40 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Courses Selection{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('courses_sel', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Courses Selection</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('courses_sel.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Course1', current_user.course1.name) }}
+{{ render_field_view('Course2', current_user.course2.name) }}
+{{ render_field_view('Course3', current_user.course3.name) }}
+{{ render_field_view('Course4', current_user.course4.name) }}
+{{ render_field_view('Course5', current_user.course5.name) }}
+{{ render_field_view('Course6', current_user.course6.name) }}
+{{ render_field_view('Course7', current_user.course7.name) }}
+{{ render_field_view('Course8', current_user.course8.name) }}
+
+<hr>
+{{ render_field_view('Total Effort', total) }}
+
+{% endblock %}

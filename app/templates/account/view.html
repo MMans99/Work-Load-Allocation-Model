@@ -1,0 +1,49 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+{% from "render/role.html" import render_role %}
+
+{% block title %}WLAM - My Account{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block navbar %}active{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{% if current_user.role == 5: %}
+{{ render_sidebar_admin('account') }}
+{% else: %}
+{{ render_sidebar_user('account', current_user.role) }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">My Account</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('account.change_password') }}" class="btn btn-sm btn-outline-secondary">Change Password</a>
+            <a href="{{ url_for('account.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('ID', current_user.university_id) }}
+{{ render_field_view('First name', current_user.fname) }}
+{{ render_field_view('Last name', current_user.lname) }}
+{{ render_field_view('Email', current_user.email) }}
+{{ render_field_view('Role', render_role(current_user.role)) }}
+{{ render_field_view('Rank', current_user.rank.name) }}
+{{ render_field_view('Profile', current_user.profile.name) }}
+{{ render_field_view('Department', current_user.department.name) }}
+{{ render_field_view('Department1', current_user.department1.name) }}
+{{ render_field_view('Department2', current_user.department2.name) }}
+
+{% endblock %}
+
+{% block copyright %}Copyright &copy; WLAM 2021{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+{% from "render/course_type.html" import render_course_type %}
+
+{% block title %}WLAM - View Course{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('course') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">View Course</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('course.edit', id=found_course.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{{ url_for('course.delete', id=found_course.id) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('ID', found_course.university_id) }}
+{{ render_field_view('Name', found_course.name) }}
+{{ render_field_view('Credit', found_course.credit) }}
+{{ render_field_view('Effort', effort) }}
+{{ render_field_view('Department', found_course.department.name) }}
+{{ render_field_view('Type', render_course_type(found_course.course_type)) }}
+
+{% endblock %}
+
+{% block copyright %}Copyright &copy; WLAM 2021{% endblock %}

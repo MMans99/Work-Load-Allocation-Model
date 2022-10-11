@@ -1,0 +1,9 @@
+{% macro render_flashed_messages(messages) %}
+{% if messages %}
+{% for msg in messages %}
+<div class="alert alert-{{ msg[0] }}" role="alert">
+    {{ msg[1]|safe }}
+</div>
+{% endfor %}
+{% endif %}
+{% endmacro %}

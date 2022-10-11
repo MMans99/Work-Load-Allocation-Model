@@ -1,0 +1,136 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/fields2_view.html" import render_fields2_view %}
+{% from "render/fields2_label.html" import render_fields2_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Account Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block navbar %}active{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('courses_sel', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Account Edit') }}
+
+<p>If you are teaching more than one section of the same course, please choose that course more than once</p>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('courses_sel.edit') }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_fields2_view(
+    'Course1 Current Selection', current_user.course1.name if current_user.course1 is not none else 'NONE',
+    'Course2 Current Selection', current_user.course2.name if current_user.course2 is not none else 'NONE')
+    }}
+    <hr>
+    {{ render_fields2_label(form.department1, "Some help text", form.department2, "Some help text") }}
+    {{ render_fields2_label(form.course1, "Some help text", form.course2, "Some help text") }}
+    <hr style="height:4px">
+    
+    {{ render_fields2_view(
+    'Course3 Current Selection', current_user.course3.name if current_user.course3 is not none else 'NONE',
+    'Course4 Current Selection', current_user.course4.name if current_user.course4 is not none else 'NONE')
+    }}
+    <hr>
+    {{ render_fields2_label(form.department3, "Some help text", form.department4, "Some help text") }}
+    {{ render_fields2_label(form.course3, "Some help text", form.course4, "Some help text") }}
+    <hr style="height:4px">
+
+    {{ render_fields2_view(
+    'Course5 Current Selection', current_user.course5.name if current_user.course5 is not none else 'NONE',
+    'Course6 Current Selection', current_user.course6.name if current_user.course6 is not none else 'NONE')
+    }}
+    <hr>
+    {{ render_fields2_label(form.department5, "Some help text", form.department6, "Some help text") }}
+    {{ render_fields2_label(form.course5, "Some help text", form.course6, "Some help text") }}
+    <hr style="height:4px">
+    
+    {{ render_fields2_view(
+    'Course7 Current Selection', current_user.course7.name if current_user.course7 is not none else 'NONE',
+    'Course8 Current Selection', current_user.course8.name if current_user.course8 is not none else 'NONE')
+    }}
+    <hr>
+    {{ render_fields2_label(form.department7, "Some help text", form.department8, "Some help text") }}
+    {{ render_fields2_label(form.course7, "Some help text", form.course8, "Some help text") }}
+
+    <br>
+    <hr>
+
+    {{ render_submit(form.submit, url_for('courses_sel.edit')) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}
+
+{% block scripts %}
+<script>
+    function department_select(value, course_select) {
+        fetch('/courses_sel/course/' + value).then(function (response) {
+            response.json().then(function (data) {
+                let optionHTML = '<option value="0"></option>'
+
+                for (let course of data.courses) {
+                    optionHTML += '<option value="' + course.id + '">' + course.name + '</option>'
+                }
+
+                course_select.innerHTML = optionHTML
+            })
+        })
+    }
+
+    let department1_select = document.getElementById('department1')
+    let course1_select = document.getElementById('course1')
+    department1_select.onchange = function () { department_select(department1_select.value, course1_select) }
+
+    let department2_select = document.getElementById('department2')
+    let course2_select = document.getElementById('course2')
+    department2_select.onchange = function () { department_select(department2_select.value, course2_select) }
+
+    let department3_select = document.getElementById('department3')
+    let course3_select = document.getElementById('course3')
+    department3_select.onchange = function () { department_select(department3_select.value, course3_select) }
+    
+    let department4_select = document.getElementById('department4')
+    let course4_select = document.getElementById('course4')
+    department4_select.onchange = function () { department_select(department4_select.value, course4_select) }
+
+    let department5_select = document.getElementById('department5')
+    let course5_select = document.getElementById('course5')
+    department5_select.onchange = function () { department_select(department5_select.value, course5_select) }
+
+    let department6_select = document.getElementById('department6')
+    let course6_select = document.getElementById('course6')
+    department6_select.onchange = function () { department_select(department6_select.value, course6_select) }
+
+    let department7_select = document.getElementById('department7')
+    let course7_select = document.getElementById('course7')
+    department7_select.onchange = function () { department_select(department7_select.value, course7_select) }
+
+    let department8_select = document.getElementById('department8')
+    let course8_select = document.getElementById('course8')
+    department8_select.onchange = function () { department_select(department8_select.value, course8_select) }
+
+    window.addEventListener('load', (event) => {
+        department_select(department1_select.value, course1_select)
+        department_select(department2_select.value, course2_select)
+        department_select(department3_select.value, course3_select)
+        department_select(department4_select.value, course4_select)
+        department_select(department5_select.value, course5_select)
+        department_select(department6_select.value, course6_select)
+        department_select(department7_select.value, course7_select)
+        department_select(department8_select.value, course8_select)
+
+    });
+</script>
+{% endblock %}

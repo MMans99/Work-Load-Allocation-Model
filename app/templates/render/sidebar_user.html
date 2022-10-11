@@ -1,0 +1,86 @@
+{% macro render_sidebar_user(url, role) %}
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="dashboard" }}" href="{{ url_for('dashboard.view') }}"><i
+                        class="fas fa-tachometer-alt"></i>&nbsp;Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="allocation_dt" }}" href="{{ url_for('allocation_dt.view') }}"><i class="fas fa-chalkboard-teacher"></i>&nbsp;Teaching</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="allocation_gs" }}" href="{{ url_for('allocation_gs.view') }}"><i class="fas fa-eye"></i>&nbsp;Indirect Supervision</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="allocation_r" }}" href="{{ url_for('allocation_r.view') }}"><i class="fas fa-scroll"></i>&nbsp;Research</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="allocation_uc" }}" href="{{ url_for('allocation_uc.view') }}"><i class="fas fa-hand-holding-medical"></i>&nbsp;Community</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ "active" if url=="allocation_l" }}" href="{{ url_for('allocation_l.view') }}"><i class="fas fa-user-tie"></i>&nbsp;Leadership</a>
+            </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Reports</span><a class="link-secondary" href="#" aria-label="Add a new report"><i
+                    class="fas fa-sliders-h"></i></a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="allocation_summary" }}"
+                    href="{{ url_for('allocation_summary.view') }}"><i
+                        class="fas fa-chart-pie"></i>&nbsp;Summary</a>
+            </li>
+            {% if role == 2or role == 3 or role == 4: %}
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="users_summary" }}" href="{{ url_for('user_summary.list') }}"><i
+                        class="fas fa-users"></i>&nbsp;Users</a>
+            </li>
+            {% endif %}
+            {% if role == 2: %}
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="department_summary" }}" href="{{ url_for('department_summary.view') }}"><i
+                        class="fas fa-chart-pie"></i>&nbsp;Department</a>
+            </li>
+            {% endif %}
+            {% if role == 3 or role == 4: %}
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="department_summary" }}" href="{{ url_for('department_summary.list') }}"><i
+                        class="fas fa-chart-pie"></i>&nbsp;Departments</a>
+            </li>
+            {% endif %}
+            {% if role == 3 or role == 4: %}
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="college_summary" }}" href="{{ url_for('college_summary.view') }}"><i
+                        class="fas fa-chart-pie"></i>&nbsp;College</a>
+            </li>
+            {% endif %}
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Courses</span><a class="link-secondary" href="#" aria-label="Add a new report"><i
+                    class="fas fa-sliders-h"></i></a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="courses_dep" }}"
+                    href="{{ url_for('courses_dep.view') }}"><i class="fas fa-building"></i></i>&nbsp;Departments</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="courses_sel" }}"
+                    href="{{ url_for('courses_sel.view') }}"><i class="fas fa-check-square"></i>&nbsp;Selection</a>
+            </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Global</span><a class="link-secondary" href="#" aria-label="Add a new report"><i
+                    class="fas fa-sliders-h"></i></a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link {{ " active" if url=="settings" }}" href="{{ url_for('settings.view') }}"><i
+                        class="fas fa-cogs"></i>&nbsp;Settings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endmacro %}

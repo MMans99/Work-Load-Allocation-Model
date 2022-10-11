@@ -1,0 +1,49 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/fields2_label.html" import render_fields2_label %}
+{% from "render/fields3_label.html" import render_fields3_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Teaching Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_dt', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Teaching Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('allocation_dt.edit') }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_fields2_label(form.dt111, "The total credit hours per week of the teaching courses excluding the labs and
+    supervision activities", form.dt112, "The total credit hours per week of the lab courses, (1.5-hour max per Lab
+    course)") }}
+    {{ render_fields2_label(form.dt113, "The total credit hours per week of any of the supervision courses. This includes time for weekly
+    meetings, special lectures, examinations, final presentations, review and marking of project reports and associated
+    documents.", form.dt114, "The total credit hours per week of any of the supervision courses. This includes time for weekly
+    meetings, special lectures, examinations, final presentations, review and marking of project reports and associated
+    documents.") }}
+    {{ render_fields2_label(form.dt121, "The total hours per week for the scheduled drop ins/office hours (including advising)", form.dt122, "The total hours per week of the tutorials") }}
+    {{ render_fields2_label(form.dt123, "The total hours per week of the exam invigilation", form.dt124, "The total hours per week for any other indirect contact") }}
+    {{ render_field_label(form.dt13, "Preparation includes Research subject area and develop/update content, Produce, edit, and update course files, Pre-lecture preparation, New technologies embedded in teaching and learning. Allocation depends on whether the course is UG, Master, or PhD.") }}
+    {{ render_field_label(form.dt14, "The total hours of the preparation of a new course in the department, (1 to 4 hours per course per week counted for 1 year)") }}
+    {{ render_field_label(form.dt15, "The total hours of the Assessment/Reassessment including Formative and Summative assessments, preparation of assessment activities, marking, compiling, and posting marks. Function of number of assessments, number of students, and course level (UG vs. Graduate)") }}
+    {{ render_field_label(form.dt16, "The total hours of office hour courses and practical training, (counted at 1/0.5 hours per student per week for Office Course/Training). These Concerns courses are offered to students under special circumstances.") }}
+    {{ render_field_label(form.dt17, "The professional development activities in teaching and learning, (0.25 hours per week). This includes faculty attendance of Teaching & Learning-related conferences, workshops, seminars, training courses, etc…") }}
+    
+    {{ render_submit(form.submit, url_for('allocation_dt.view')) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

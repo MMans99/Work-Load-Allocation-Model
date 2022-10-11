@@ -1,0 +1,31 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Department Summary{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('department_summary', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Department Summary</h1>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Department', department_name) }}
+{{ render_field_view('Average Direct Contact HRS/Week', average_week) }}
+{{ render_field_view('Average Direct Contact HRS/Semester', average_sem) }}
+{{ render_field_view('Average Indirect Contact and Preparaion HRS/Semester', average_indirect) }}
+
+<hr>
+{{ render_field_view('Average Total HRS/Semester', average_total) }}
+
+{% endblock %}

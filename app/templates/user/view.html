@@ -1,0 +1,45 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+{% from "render/role.html" import render_role %}
+
+{% block title %}WLAM - User Profile{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('user') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">User Profile</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('user.change_password', id=found_user.id) }}" class="btn btn-sm btn-outline-secondary">Change Password</a>
+            <a href="{{ url_for('user.edit', id=found_user.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{{ url_for('user.delete', id=found_user.id) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('ID', found_user.university_id) }}
+{{ render_field_view('First name', found_user.fname) }}
+{{ render_field_view('Last name', found_user.lname) }}
+{{ render_field_view('Email', found_user.email) }}
+{{ render_field_view('Role', render_role(found_user.role)) }}
+{{ render_field_view('Rank', found_user.rank.name) }}
+{{ render_field_view('Profile', found_user.profile.name) }}
+{{ render_field_view('Department', found_user.department.name) }}
+{{ render_field_view('Department1', found_user.department1.name) }}
+{{ render_field_view('Department2', found_user.department2.name) }}
+
+{% endblock %}
+
+{% block copyright %}Copyright &copy; WLAM 2021{% endblock %}

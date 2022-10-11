@@ -1,0 +1,42 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/fields2_label.html" import render_fields2_label %}
+{% from "render/fields3_label.html" import render_fields3_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - User Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('user') }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('User Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('user.edit', id=found_user.id) }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_field_label(form.university_id, "Some help text") }}
+    {{ render_fields2_label(form.fname, "Some help text", form.lname, "Some help text") }}
+    {{ render_field_label(form.email, "Some help text") }}
+    {{ render_field_label(form.rank, "Some help text") }}
+    {{ render_field_label(form.profile, "Some help text") }}
+    {{ render_fields3_label(form.department, "Some help text", form.department1, "Some help text", form.department2, "Some help text") }}
+    {{ render_field_label(form.role, "Some help text") }}
+
+    {{ render_submit(form.submit, url_for('user.view', id=found_user.id)) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

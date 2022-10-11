@@ -1,0 +1,28 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+
+{% block title %}WLAM - Settings{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{% if current_user.role == 5: %}
+{{ render_sidebar_admin('settings') }}
+{% else: %}
+{{ render_sidebar_user('settings', current_user.role) }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Settings') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<div class="row">
+</div>
+
+{% endblock %}

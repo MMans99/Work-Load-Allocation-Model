@@ -1,0 +1,50 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - View Profile{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('profile') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">View Profile</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('profile.edit', id=found_profile.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href="{{ url_for('profile.delete', id=found_profile.id) }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Name', found_profile.name) }}
+{{ render_field_view('Direct Teaching', found_profile.direct_teaching) }}
+{{ render_field_view('Direct Teaching Percent', found_profile.direct_teaching_percent) }}
+{{ render_field_view('Direct Teaching Minimum', found_profile.direct_teaching_minimum) }}
+{{ render_field_view('Supervision', found_profile.supervision) }}
+{{ render_field_view('Supervision Percent', found_profile.supervision_percent) }}
+{{ render_field_view('Research', found_profile.supervision) }}
+{{ render_field_view('Research Percent', found_profile.supervision_percent) }}
+{{ render_field_view('University Service', found_profile.university_service) }}
+{{ render_field_view('University Service Percent', found_profile.university_service_percent) }}
+{{ render_field_view('Lead Manage Admin', found_profile.lead_manage_admin) }}
+{{ render_field_view('Lead Manage Admin Percent', found_profile.lead_manage_admin_percent) }}
+
+<hr>
+{{ render_field_view('Total',
+found_profile.direct_teaching+found_profile.supervision+found_profile.research+found_profile.university_service+found_profile.lead_manage_admin)
+}}
+
+{% endblock %}
+
+{% block copyright %}Copyright &copy; WLAM 2021{% endblock %}

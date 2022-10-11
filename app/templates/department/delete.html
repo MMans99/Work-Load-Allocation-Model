@@ -1,0 +1,36 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Department Delete{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('department') }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Department Delete</h1>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('department.delete', id=found_department.id) }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    <p>Delete department: University ID: {{ found_department.university_id }}, Name: {{ found_department.name }}?</p>
+    <br>
+
+    {{ render_submit(form.submit, url_for('department.view', id=found_department.id)) }}
+
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

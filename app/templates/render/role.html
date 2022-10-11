@@ -1,0 +1,13 @@
+{% macro render_role(role) %}
+{% if role == 1 %}
+User
+{% elif role == 2 %}
+Chairman
+{% elif role == 3 %}
+Vice Dean / Assistant-Dean
+{% elif role == 4 %}
+Dean
+{% elif role == 5 %}
+Admin
+{% endif %}
+{% endmacro %}

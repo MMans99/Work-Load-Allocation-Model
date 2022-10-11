@@ -1,0 +1,38 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Course Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_admin('course') }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Course Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('course.edit', id=found_course.id) }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_field_label(form.university_id) }}
+    {{ render_field_label(form.name) }}
+    {{ render_field_label(form.credit) }}
+    {{ render_field_label(form.department) }}
+    {{ render_field_label(form.course_type, "Some help text") }}
+
+    {{ render_submit(form.submit, url_for('course.view', id=found_course.id)) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

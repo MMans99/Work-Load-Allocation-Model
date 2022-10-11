@@ -1,0 +1,48 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Teaching{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_dt', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Teaching</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('allocation_dt.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Lectures', current_user.dt111) }}
+{{ render_field_view('Laboratory', current_user.dt112) }}
+{{ render_field_view('SDP/FYP/Master Research Project Supervision', current_user.dt113) }}
+{{ render_field_view('Direct Postgraduate Supervision', current_user.dt114) }}
+{{ render_field_view('Scheduled drop ins/Office Hours', current_user.dt121) }}
+{{ render_field_view('Tutorials', current_user.dt122) }}
+{{ render_field_view('Exam invigilation', current_user.dt123) }}
+{{ render_field_view('Other', current_user.dt124) }}
+{{ render_field_view('Preparation', current_user.dt13) }}
+{{ render_field_view('Preperation of Totally New Course', current_user.dt14) }}
+{{ render_field_view('Assessment/Reassessment', current_user.dt15) }}
+{{ render_field_view('Office Hour Courses/Practical Training', current_user.dt16) }}
+{{ render_field_view('Professional Development Activties', current_user.dt17)
+}}
+
+<hr>
+{{ render_field_view('Direct Teaching', directteaching) }}
+{{ render_field_view('Indirect Teaching', indirectteaching) }}
+{{ render_field_view('Summary', sum) }}
+
+{% endblock %}

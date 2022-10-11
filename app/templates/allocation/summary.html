@@ -1,0 +1,46 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Summary{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_summary', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Summary</h1>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Direct Teaching', sumdt) }}
+{{ render_field_view('Indirect Supervision', sumgs) }}
+{{ render_field_view('Research', sumr) }}
+{{ render_field_view('University and Community Service', sumuc) }}
+{{ render_field_view('Leadership, Management and Administration', suml) }}
+
+<hr>
+{{ render_field_view('Total Hours', total) }}
+
+<hr>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Expected ({{ current_user.profile.name }})</h1>
+</div>
+
+{{ render_field_view('Direct Teaching', current_user.profile.direct_teaching) }}
+{{ render_field_view('Indirect Supervision', current_user.profile.supervision) }}
+{{ render_field_view('Research', current_user.profile.research) }}
+{{ render_field_view('University and Community Service', current_user.profile.university_service) }}
+{{ render_field_view('Leadership, Management and Administration', current_user.profile.lead_manage_admin) }}
+
+<hr>
+{{ render_field_view('Total Expected Hours', current_user.profile.direct_teaching+current_user.profile.supervision+current_user.profile.research+current_user.profile.university_service+current_user.profile.lead_manage_admin) }}
+
+{% endblock %}

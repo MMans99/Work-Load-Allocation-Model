@@ -1,0 +1,12 @@
+{% macro render_fields2_view(label1, field1, label2, field2) %}
+<div class="form-group row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <h5>{{ label1 }}</h5>
+        {{ field1 }}
+    </div>
+    <div class="col-sm-6">
+        <h5>{{ label2 }}</h5>
+        {{ field2 }}
+    </div>
+</div>
+{% endmacro %}

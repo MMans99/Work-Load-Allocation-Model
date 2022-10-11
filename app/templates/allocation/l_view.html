@@ -1,0 +1,40 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Leadership, Management and Administration{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_l', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Leadership, Management and Administration</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('allocation_l.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Senior Management Roles', current_user.l51) }}
+{{ render_field_view('Dean', current_user.l52) }}
+{{ render_field_view('Director', current_user.l53) }}
+{{ render_field_view('Vice-Dean', current_user.l54) }}
+{{ render_field_view('Assistant-Dean', current_user.l55) }}
+{{ render_field_view('Dept. Chair', current_user.l56) }}
+{{ render_field_view('Program Coordinator', current_user.l57) }}
+{{ render_field_view('Other', current_user.l58) }}
+
+<hr>
+{{ render_field_view('Summary', sum) }}
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/fields2_label.html" import render_fields2_label %}
+{% from "render/fields3_label.html" import render_fields3_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - University and Community Service Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_uc', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('University and Community Service Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('allocation_uc.edit') }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_field_label(form.uc41, "The accreditation and related administrative tasks, (2/1 hours per week for Accreditation Committee Chair/Member). This includes chairing and membership in accreditation committees, preparation of self-study reports, course coordination, course, and program assessment, etc…") }}
+    {{ render_field_label(form.uc42, "This includes involvement in permanent Department, College, and University level committees (1/0.5 hours per week per committee for Chair/Member). Time spent includes meeting time, official email communications, committee tasks, etc…") }}
+    {{ render_field_label(form.uc43, "The total hours of the teaching and research related administration, (1/0.5 hours per week per committee for Chair/Member). This includes membership in various ad-hoc committees such as for reviewing final exam paper, investigation of alleged acts of dishonesty in examinations, etc…") }}
+    {{ render_field_label(form.uc44, "The total hours of the teaching and research related administration, (1/0.5 hours per week per committee for Chair/Member). This includes membership in various ad-hoc committees such as for reviewing final exam paper, investigation of alleged acts of dishonesty in examinations, etc…") }}
+    {{ render_field_label(form.uc45, "The hours associated with the effective organization and delivery of successful conference/workshop activities, (maximum 3/1 hours per week per event for event chair/member).") }}
+    {{ render_fields3_label(form.uc461, "The total hours of the editorial board, guest editor, (1/0.5 hours per board for editor/member)", form.uc462, "The total hours of referee for journals and conferences, (0.25/0.125 hours per paper for Journal/Conference)", form.uc463, "The membership in professional organizations, (1 hour per active membership). Including technical Committees") }}
+    {{ render_field_label(form.uc47, "The total hours of the consulting cadaverous, (hours depends on the size of the project, max 2 hours per week per project). Consulting offered by faculty member with university approval.") }}
+    {{ render_field_label(form.uc48, "The total hours of this field, (0.5 hour per week per activity). This includes training and educational programs/courses/workshops/seminars offered to the community. Hours include preparation and delivery time.") }}
+    {{ render_field_label(form.uc49, "The total hours of this field, (1 hour per week per project/activity). This includes joint projects with the community not covered in other categories.") }}
+
+    {{ render_submit(form.submit, url_for('allocation_uc.view')) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

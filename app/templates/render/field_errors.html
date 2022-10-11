@@ -1,0 +1,11 @@
+{% macro render_field_errors(errors) %}
+{% if errors %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        {% for err in errors %}
+        <li>{{ err }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endmacro %}

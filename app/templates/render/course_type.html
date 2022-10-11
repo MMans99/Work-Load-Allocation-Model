@@ -1,0 +1,13 @@
+{% macro render_course_type(role) %}
+{% if role == 1 %}
+Normal Course
+{% elif role == 2 %}
+Master Course
+{% elif role == 3 %}
+Phd Course
+{% elif role == 4 %}
+Laboratory
+{% elif role == 5 %}
+Embedded Course [Course + Lab]
+{% endif %}
+{% endmacro %}

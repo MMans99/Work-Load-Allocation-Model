@@ -1,0 +1,42 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/fields2_label.html" import render_fields2_label %}
+{% from "render/fields3_label.html" import render_fields3_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Research Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_r', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Research Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('allocation_r.edit') }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_field_label(form.r31, "Teaching and research related scholarship encompass the range of activities by which academic faculty maintain currency with their subject area and includes time for the blue skies thinking and reading which supports new teaching and research initiatives. This might include: The scholarship involved in preparing for the development of new courses or programmes or the thinking that leads to new research; Maintaining and acquiring professional skills, including research skills.") }}
+    {{ render_fields2_label(form.r321, "The total number of your papers, (4 hours per paper per week)", form.r322, "The total number of your papers, (2 hours per paper per week)") }}
+    {{ render_field_label(form.r33, "The total hours per week. All new faculty who are new to teaching and research (i.e., who have less than three years in university (teaching and research experience) will be allocated a Role Development allowance instead of a quality-based research allocation. This allowance is typically allocated for the first two years after appointment to enable faculty to establish independent research activity at the university.") }}
+    {{ render_field_label(form.r34, "This category only covers research/projects that are funded from the university. Please write the hours spent for being PI, Co-PI, or collaborator, (2/1 hours per week per project for PI/Co-PI).") }}
+    {{ render_field_label(form.r35, "This category only covers research/projects that are funded from external sources. Please write the hours spent for being PI, Co-PI, or collaborator, (3/1.5 hours per week per project for PI/Co-PI).") }}
+    {{ render_field_label(form.r36, "The hours to be allocated to support various research management roles, (2/1 hours per week per group for Coord/Member). This includes research group coordination and membership.") }}
+    {{ render_field_label(form.r37, "The hours associated with the application and management of patents") }}
+    {{ render_field_label(form.r38, "The total hours of the professional development activities in research, (0.25 hours per week). This includes faculty attendance of Research-related conferences, workshops, seminars, training courses, etc…") }}
+
+    {{ render_submit(form.submit, url_for('allocation_r.view')) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

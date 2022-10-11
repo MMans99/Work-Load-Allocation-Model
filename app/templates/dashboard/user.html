@@ -1,0 +1,109 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+
+{% block title %}WLAM - Dashboard{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/chartjs.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{% if current_user.role == 5: %}
+{{ render_sidebar_admin('dashboard') }}
+{% else: %}
+{{ render_sidebar_user('dashboard', current_user.role) }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Dashboard') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2304" height="972" style="display: block; height: 486px; width: 1152px;"></canvas>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    /* globals Chart:false, feather:false */
+
+    (function () {
+        'use strict'
+
+        feather.replace()
+
+        // Graphs
+        var ctx = document.getElementById('myChart')
+        // eslint-disable-next-line no-unused-vars
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Teaching',
+                    'Teaching-Expected',
+                    'Indirect Supervision',
+                    'Indirect Supervision-Expected',
+                    'Research',
+                    'Research-Expected',
+                    'Community',
+                    'Community-Expected',
+                    'Leadership',
+                    'Leadership-Expected',
+                    'Total',
+                    'Total-Expected'
+                ],
+                datasets: [{
+                    data: [
+                        {{ sumdt }},
+                        {{ esumdt }},
+                        {{ sumgs }},
+                        {{ esumgs }},
+                        {{ sumr }},
+                        {{ esumr }},
+                        {{ sumuc }},
+                        {{ esumuc }},
+                        {{ suml }},
+                        {{ esuml }},
+                        {{ total }},
+                        {{ etotal }}
+                    ],
+                    lineTension: 0,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: '#007bff',
+                    borderWidth: 4,
+                    pointBackgroundColor: '#007bff'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                },
+                legend: {
+                    display: false
+                }
+            }
+        })
+    })()
+</script>
+{% endblock %}

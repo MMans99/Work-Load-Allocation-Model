@@ -1,0 +1,43 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - University and Community Service{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_uc', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">University and Community Service</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('allocation_uc.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Accreditation and Related Administrative Tasks', current_user.uc41) }}
+{{ render_field_view('Committee Work', current_user.uc42) }}
+{{ render_field_view('Teaching/Research Related Administration', current_user.uc43) }}
+{{ render_field_view('Administrative Tasks/requests from Dept., College, University', current_user.uc44) }}
+{{ render_field_view('Conference/Workshop Organization & Support', current_user.uc45) }}
+{{ render_field_view('Editorial Board, Guest Editor', current_user.uc461) }}
+{{ render_field_view('Referee for Journals and Conferences', current_user.uc462) }}
+{{ render_field_view('Membership in Professional Organizations', current_user.uc463) }}
+{{ render_field_view('Consulting', current_user.uc47) }}
+{{ render_field_view('Engagemwent in training and lifelong learning', current_user.uc48) }}
+{{ render_field_view('Collaboration projects with the Community', current_user.uc49) }}
+
+<hr>
+{{ render_field_view('Summary', sum) }}
+
+{% endblock %}

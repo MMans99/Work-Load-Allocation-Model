@@ -1,0 +1,41 @@
+{% extends "base-user.html" %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_view.html" import render_field_view %}
+
+{% block title %}WLAM - Research{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_r', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Research</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ url_for('allocation_r.edit') }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+        </div>
+    </div>
+</div>
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+{{ render_field_view('Teaching and Research Related Scholarship', current_user.r31) }}
+{{ render_field_view('Journal Articles', current_user.r321) }}
+{{ render_field_view('Conference Articles', current_user.r322) }}
+{{ render_field_view('New to University: Role Development', current_user.r33) }}
+{{ render_field_view('Internally-Funded Research', current_user.r34) }}
+{{ render_field_view('External Funded Research', current_user.r35) }}
+{{ render_field_view('Support for research', current_user.r36) }}
+{{ render_field_view('Patents', current_user.r37) }}
+{{ render_field_view('Professional Development Activties', current_user.r38) }}
+
+<hr>
+{{ render_field_view('Summary', sum) }}
+
+{% endblock %}

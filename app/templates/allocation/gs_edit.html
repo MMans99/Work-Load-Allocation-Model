@@ -1,0 +1,37 @@
+{% extends "base-user.html" %}
+{% from "render/heading.html" import render_heading %}
+{% from "render/flashed_messages.html" import render_flashed_messages %}
+{% from "render/field_label.html" import render_field_label %}
+{% from "render/submit.html" import render_submit %}
+
+{% block title %}WLAM - Graduate Student Supervision Edit{% endblock %}
+{% block styles %}
+<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+{% endblock %}
+{% block username %}{{ current_user.fname }} {{ current_user.lname }}{% endblock %}
+
+{% block sidebar %}
+{{ render_sidebar_user('allocation_gs', current_user.role) }}
+{% endblock %}
+
+{% block content %}
+
+{{ render_heading('Graduate Student Supervision Edit') }}
+
+{{ render_flashed_messages(get_flashed_messages(with_categories=True)) }}
+
+<form action='{{ url_for('allocation_gs.edit') }}' method='POST' autocomplete="off">
+    {{ form.csrf_token }}
+
+    {{ render_field_label(form.gs21, "The total hours spent in PhD Thesis supervision as the main supervisor and/ or co-supervisor, (Main/co:3/1.5 hours per student per week).") }}
+    <!-- {{ render_field_label(form.gs22, "The total hours spent in Master Thesis supervision as the main supervisor and/ or co-supervisor, (Main/co: 2/1 hours per student per week).") }} -->
+    {{ render_field_label(form.gs23, "The total hours of Variable support roles within individual Faculties that may be associated with PhD and Master Thesis/Research Project supervision, (1 hour per student/per activity). This includes Qualifying Exam, Independent Studies Course, Thesis Proposal, Thesis Examination, etc...") }}
+    {{ render_field_label(form.gs24, "The total hours of graduate program coordination, (6 hours per week per program). This includes Master and PhD program Coordination.") }}
+    {{ render_field_label(form.gs25, "The total hours if you have any other activities, (hours depend on activity). This category is used to capture activity not covered by standard definitions (e.g., 0.5 hour per week for membership in thesis supervisory committee).") }}
+
+    {{ render_submit(form.submit, url_for('allocation_gs.view')) }}
+</form>
+
+{% endblock %}
+
+{% block copyright %}<p class="mt-5 mb-3 text-muted">&copy; University of Sharjah - 2021</p>{% endblock %}

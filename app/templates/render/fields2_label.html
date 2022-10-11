@@ -1,0 +1,35 @@
+{% macro render_fields2_label(field1, help1, field2, help2) %}
+<div class="form-group row">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        {{ field1.label }}
+        {{ field1 }}
+        <i class="far fa-question-circle" title="{{ help1 }}"></i>
+        <small class="form-text text-muted">hover to get help</small>
+        {% if field1.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field1.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-sm-6">
+        {{ field2.label }}
+        {{ field2 }}
+        <i class="far fa-question-circle" title="{{ help2 }}"></i>
+        <small class="form-text text-muted">hover to get help</small>
+        {% if field2.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for err in field2.errors %}
+                <li>{{ err }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<div style="height: 8px;"></div>
+{% endmacro %}
