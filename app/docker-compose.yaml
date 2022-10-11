@@ -1,0 +1,14 @@
+version: '3.5'
+  
+services:
+  db:
+    container_name: sql1
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "zwUph2x8V5yoMdB2"
+    volumes:
+      - /Users/khs/wlam-app/data:/var/opt/mssql
+
