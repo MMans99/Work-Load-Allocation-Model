@@ -30,3 +30,7 @@ Key roles that this application offers:
 
 
 The Settings page should include server options that could be added by the backend users amd possibly Database features such as importing CSV files.
+
+![image](https://user-images.githubusercontent.com/86585818/195411288-84171c7b-0b4f-4608-990d-d8a14d4e660a.png)
+
+![image](https://user-images.githubusercontent.com/86585818/195411997-498d1383-11ea-4930-aa65-c09ce149c4de.png)
