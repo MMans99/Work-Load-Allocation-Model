@@ -22,7 +22,7 @@ Key roles that this application offers:
 
 -> Generates a PDF report for a selected user (under the chairman's/dean's supervision) displaying all his details
 
-    **[Text me for getting the PDF version since wwkhtmltopdf was used]
+    **[Contact me for getting the PDF version since wwkhtmltopdf was used]
     
 -> Shows every department and the corrosponding Hours/Week or Hours/Semester
 
