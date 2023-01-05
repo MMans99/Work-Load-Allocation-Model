@@ -26,7 +26,7 @@ Key roles that this application offers:
     
 -> Shows every department and the corrosponding Hours/Week or Hours/Semester
 
--> Allows all faculty member to teach 8 different courses from different selected departments.
+-> Allows all faculty members to teach 8 different courses from different selected departments.
 
 
 The Settings page should include server options that could be added by the backend users and possibly Database features such as importing CSV files.
