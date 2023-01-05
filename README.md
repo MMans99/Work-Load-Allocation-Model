@@ -29,7 +29,7 @@ Key roles that this application offers:
 -> Allows all faculty member to teach 8 different courses from different selected departments.
 
 
-The Settings page should include server options that could be added by the backend users amd possibly Database features such as importing CSV files.
+The Settings page should include server options that could be added by the backend users and possibly Database features such as importing CSV files.
 
 ![image](https://user-images.githubusercontent.com/86585818/195411288-84171c7b-0b4f-4608-990d-d8a14d4e660a.png)
 
