@@ -1,5 +1,5 @@
-# Work-Allocation-Model
-Work Allocation Model for University Faculty Members 
+# Work-Load Allocation Model
+Work Load Allocation Model for University Faculty Members 
 
 Extremly handy and useful for Universities that deal with work allocation model distrubution profiles.
 
